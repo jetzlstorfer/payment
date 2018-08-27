@@ -1,0 +1,7 @@
+---
+applications:
+- name: payment
+  memory: 512M
+  instances: 1
+  docker:
+    image: jbraeuer/payment

@@ -1,0 +1,10 @@
+---
+applications:
+- name: payment
+  disk: 256M
+  memory: 128M
+  random-route: true
+  buildpack: go_buildpack
+  command: /cmd/paymentsvc/main
+  env:
+    GOPACKAGENAME: payment

@@ -1,0 +1,14 @@
+FROM golang:1.7
+
+RUN mkdir /app
+COPY payment/ /go/src/github.com/microservices-demo/payment
+
+RUN go get -u github.com/FiloSottile/gvt
+RUN cd /go/src/github.com/microservices-demo/payment/ && gvt restore
+RUN ls -lsa /go/src/github.com/microservices-demo/payment
+
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /app/main github.com/microservices-demo/payment/cmd/paymentsvc
+
+CMD ["/app/main", "-port=8080"]
+
+#EXPOSE 80
