@@ -63,10 +63,7 @@ pipeline {
             }
             dir ('/home/jenkins/go/src/github.com/dynatrace-sockshop/payment') {
               container('go') {
-                //sh "make build"
-                sh "scripts/build.jb.sh"
-                sh "cd Docker/payment"
-                sh "docker build -t $(NAME) -f ./docker/payment/Dockerfile . "
+                sh "make build"
                 sh 'export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml'
 
                 sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
