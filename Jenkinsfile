@@ -63,7 +63,10 @@ pipeline {
             }
             dir ('/home/jenkins/go/src/github.com/jetzlstorfer/payment') {
               container('go') {
-                sh "make build"
+                //sh "make build"
+                sh "scripts/build.jb.sh"
+                sh "cd docker/payment"
+                sh "docker build -t jetzlstorfer/payment -f ./docker/payment/Dockerfile ."
                 sh 'export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml'
 
                 sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
