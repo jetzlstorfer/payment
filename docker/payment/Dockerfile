@@ -7,7 +7,7 @@ RUN go get -u github.com/FiloSottile/gvt
 RUN cd /go/src/github.com/microservices-demo/payment/ && gvt restore
 RUN ls -lsa /go/src/github.com/microservices-demo/payment
 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /app/main github.com/microservices-demo/payment/cmd/paymentsvc
+RUN GOOS=linux go build -a -ldflags -linkmode=external -installsuffix cgo -o /app/main github.com/microservices-demo/payment/cmd/paymentsvc
 
 CMD ["/app/main", "-port=8080"]
 
