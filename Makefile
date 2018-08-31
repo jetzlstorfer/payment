@@ -11,7 +11,7 @@ copy:
 	docker rm $(INSTANCE)
 
 release:
-	docker build -t $(NAME) -f ./docker/payment/Dockerfile-release .
+	docker build -t $(NAME) -f ./build/docker/payment/Dockerfile-release ./build/docker
 
 test:
 	GROUP=weaveworksdemos COMMIT=$(COMMIT) ./scripts/build.sh
